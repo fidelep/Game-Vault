@@ -31,8 +31,7 @@ descargados y permita a los usuarios interactuar con él.
     "developer": "Level Infinite",
     "release_date": "2024-06-22",
     "freetogame_profile_url": "https://www.freetogame.com/tarisland"
-  },
-  ...
+  }
   ]
   ```
   
@@ -79,8 +78,8 @@ descargados y permita a los usuarios interactuar con él.
 ### Annotation Processor
 - **KSP:** 2.0.21-1.0.28
 
-### Otras por definir
-- TODO
+### Otras
+- **KtLint:** 11.1.0
 
 ---
 
