@@ -80,6 +80,9 @@ descargados y permita a los usuarios interactuar con él.
 
 ### Otras
 - **KtLint:** 11.1.0
+- **TODO:**
+  - sqlcipher-android: For now is better to avoid the plain text password and better add a source for 
+  the key
 
 ---
 
