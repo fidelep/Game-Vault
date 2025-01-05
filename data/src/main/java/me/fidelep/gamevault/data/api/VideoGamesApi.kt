@@ -5,5 +5,7 @@ import retrofit2.http.GET
 
 interface VideoGamesApi {
     @GET("games")
-    suspend fun getGames(): List<VideoGameDTO>
+    suspend fun getGames(): List<VideoGameDTO>?
+
+    // TODO: if required we might add Api endpoint to get details from online source
 }
