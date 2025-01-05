@@ -1,12 +1,13 @@
 package me.fidelep.gamevault.data.db
 
 import androidx.room.Database
+import androidx.room.RoomDatabase
 import me.fidelep.gamevault.data.db.GameVaultDatabase.Companion.DB_VERSION
 import me.fidelep.gamevault.data.db.dao.VideoGameDao
 import me.fidelep.gamevault.data.db.model.VideoGameEntity
 
-@Database(entities = [VideoGameEntity::class], version = DB_VERSION, exportSchema = true)
-abstract class GameVaultDatabase {
+@Database(entities = [VideoGameEntity::class], version = DB_VERSION, exportSchema = false)
+abstract class GameVaultDatabase : RoomDatabase() {
     abstract fun videoGameDao(): VideoGameDao
 
     companion object {

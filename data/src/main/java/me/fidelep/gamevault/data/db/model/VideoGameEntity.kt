@@ -2,11 +2,13 @@ package me.fidelep.gamevault.data.db.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import me.fidelep.gamevault.data.db.model.VideoGameEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 data class VideoGameEntity(
     @ColumnInfo(name = COLUMN_ID)
+    @PrimaryKey
     val id: Int,
     @ColumnInfo(name = COLUMN_TITLE)
     val title: String,
@@ -28,6 +30,8 @@ data class VideoGameEntity(
     val releaseDate: String,
     @ColumnInfo(name = COLUMN_FREETOGAME_PROFILE_URL)
     val freetogameProfileUrl: String,
+    @ColumnInfo(name = COLUMN_IS_ACTIVE)
+    val isActive: Boolean,
 ) {
     companion object {
         const val TABLE_NAME = "videogame"
@@ -42,5 +46,6 @@ data class VideoGameEntity(
         const val COLUMN_DEVELOPER = "developer"
         const val COLUMN_RELEASE_DATE = "release_date"
         const val COLUMN_FREETOGAME_PROFILE_URL = "freetogame_profile_url"
+        const val COLUMN_IS_ACTIVE = "is_active"
     }
 }
