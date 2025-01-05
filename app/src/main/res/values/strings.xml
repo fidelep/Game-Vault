@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Game Vault</string>
+    <string name="loading_your_vault">Cargando tu biblioteca..</string>
+    <string name="video_game_icon">Icono de videojuego</string>
+    <string name="miniatura_del_juego">Miniatura del juego %1$s</string>
+    <string name="genre_data">Genero: %1$s</string>
+    <string name="release_date_data">Fecha de estreno: %1$s</string>
+    <string name="search">Buscar...</string>
+    <string name="filter_options">Opciones de filtro</string>
 </resources>

@@ -24,13 +24,15 @@ interface VideoGameDao {
     // TODO: Change to get video games by title | developer | publisher or even consider a selectable filter params
     @Query(
         "SELECT * FROM ${VideoGameEntity.TABLE_NAME} " +
-            "WHERE ${VideoGameEntity.COLUMN_TITLE} LIKE :title",
+            "WHERE ${VideoGameEntity.COLUMN_TITLE} LIKE :title " +
+            "AND ${VideoGameEntity.COLUMN_IS_ACTIVE} = 1",
     )
     suspend fun getByTitle(title: String): List<VideoGameEntity>
 
     @Query(
         "SELECT * FROM ${VideoGameEntity.TABLE_NAME} " +
-            "WHERE ${VideoGameEntity.COLUMN_GENRE} LIKE :genre",
+            "WHERE ${VideoGameEntity.COLUMN_GENRE} LIKE :genre " +
+            "AND ${VideoGameEntity.COLUMN_IS_ACTIVE} = 1",
     )
     suspend fun getByGenre(genre: String): List<VideoGameEntity>
 }

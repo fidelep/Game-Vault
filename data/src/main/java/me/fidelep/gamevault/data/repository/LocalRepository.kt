@@ -58,7 +58,10 @@ class LocalRepository(
 
     override suspend fun getVideoGamesByCoincidence(param: String): VideoGameResult =
         try {
-            val result = videoGameDao.getByTitle(param).map { it.toModel() }
+            val result =
+                videoGameDao
+                    .getByTitle("%$param%") // TODO: Handle % symbol in another part
+                    .map { it.toModel() }
             VideoGameResult.Success(result)
         } catch (exception: Exception) {
             exception.mapError()
@@ -66,7 +69,10 @@ class LocalRepository(
 
     override suspend fun getVideoGamesByGenre(gender: String): VideoGameResult =
         try {
-            val result = videoGameDao.getByTitle(gender).map { it.toModel() }
+            val result =
+                videoGameDao
+                    .getByGenre("%$gender%") // TODO: Handle % symbol in another part
+                    .map { it.toModel() }
             VideoGameResult.Success(result)
         } catch (exception: Exception) {
             exception.mapError()

@@ -8,7 +8,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
-composeBom = "2024.04.01"
+composeBom = "2024.12.01"
 # Custom
 retrofit = "2.11.0"
 room = "2.6.1"
@@ -17,8 +17,8 @@ daggerHilt = "2.48"
 mockito = "5.13.0"
 mockitoK = "5.4.0"
 coroutineTest = "1.7.3"
-appcompat = "1.7.0"
-material = "1.12.0"
+coil = "2.7.0"
+navigationRuntimeKtx = "2.8.5"
 
 [libraries]
 ktlint-compose = { group = "io.nlopez.compose.rules", name = "ktlint", version.ref = "ktlint" }
@@ -47,8 +47,10 @@ dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compi
 mockito-core = { group ="org.mockito", name = "mockito-core", version.ref = "mockito" }
 mockito-kotlin = { group ="org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoK" }
 kotlinx-coroutines-test = { group ="org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationRuntimeKtx" }
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
 
 [plugins]
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

@@ -22,6 +22,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "GAME_VAULT_BASE_URL", "\"https://www.freetogame.com/api/\"")
     }
 
     buildTypes {
@@ -42,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -51,9 +54,16 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    hilt {
+        enableAggregatingTask = false
+    }
 }
 
 dependencies {
+    // modules
+    api(project(":domain"))
+    api(project(":data"))
+
     // ktlint
     ktlintRuleset(libs.ktlint.compose)
 
@@ -65,6 +75,11 @@ dependencies {
     implementation(libs.room)
     implementation(libs.room.coroutines)
     ksp(libs.room.compiler)
+
+    // Compose
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.coil)
 
     // Core
     implementation(libs.androidx.core.ktx)

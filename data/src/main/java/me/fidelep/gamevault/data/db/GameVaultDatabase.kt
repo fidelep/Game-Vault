@@ -1,6 +1,8 @@
 package me.fidelep.gamevault.data.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import me.fidelep.gamevault.data.db.GameVaultDatabase.Companion.DB_VERSION
 import me.fidelep.gamevault.data.db.dao.VideoGameDao
@@ -13,5 +15,8 @@ abstract class GameVaultDatabase : RoomDatabase() {
     companion object {
         const val DB_VERSION = 1
         const val DB_NAME = "db_game_vault"
+
+        @JvmStatic
+        fun create(context: Context) = Room.databaseBuilder(context, GameVaultDatabase::class.java, DB_NAME).build()
     }
 }
