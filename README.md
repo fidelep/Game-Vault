@@ -69,17 +69,19 @@ descargados y permita a los usuarios interactuar con él.
 - **Room:** 2.6.11
 
 ### Inyección de dependencias
-- **Dagger Hilt:** 1.4.0
+- **Dagger Hilt:** 2.48
 
 ### Testing
-- **Mockito:** 4.11.0
-- **Mockito Kotlin:** 4.11.0
+- **Mockito:** 5.13.0
+- **Mockito Kotlin:** 5.4.0
+- **Kotlinx Coroutines Test:** 1.7.3
 
 ### Annotation Processor
 - **KSP:** 2.0.21-1.0.28
 
 ### Otras
 - **KtLint:** 11.1.0
+- **Coil:** 2.7.0
 - **TODO:**
   - sqlcipher-android: For now is better to avoid the plain text password and better add a source for 
   the key
@@ -129,6 +131,13 @@ evitar la creación de clases muy grandes.
 Elegí _Jetpack Compose_ ya que facilita el desarrollo de interfaces así como su implementación 
 y previsualización. Por otro lado es la herramienta que actualmente recomienda Google para el 
 desarrollo de vistas en aplicaciones Android.
+
+---
+
+### Pendiente
+En el codigo hay algunos _TODOs_ con las mejoras y fixes que identifique durante el desarrollo y 
+quedan pendientes de realizar.
+Tambien está identificado el bug que no muestra los dialogs y loaders que se ejecutan desde el BaseActivity. 
 
 ---
 
