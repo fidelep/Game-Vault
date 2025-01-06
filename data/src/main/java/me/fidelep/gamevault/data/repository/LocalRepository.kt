@@ -77,4 +77,17 @@ class LocalRepository(
         } catch (exception: Exception) {
             exception.mapError()
         }
+
+    override suspend fun getVideoGamesById(id: Int): VideoGameResult =
+        try {
+            val result = videoGameDao.getById(id)
+            if (result != null
+            ) {
+                VideoGameResult.Success(result.toModel())
+            } else {
+                VideoGameResult.Error(ResponseError.NO_MATCHES)
+            }
+        } catch (exception: Exception) {
+            exception.mapError()
+        }
 }

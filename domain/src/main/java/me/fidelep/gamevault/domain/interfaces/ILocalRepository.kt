@@ -18,4 +18,6 @@ interface ILocalRepository {
     suspend fun getVideoGamesByCoincidence(param: String): VideoGameResult
 
     suspend fun getVideoGamesByGenre(gender: String): VideoGameResult
+
+    suspend fun getVideoGamesById(id: Int): VideoGameResult
 }

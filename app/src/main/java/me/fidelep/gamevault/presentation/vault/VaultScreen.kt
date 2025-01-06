@@ -2,32 +2,24 @@ package me.fidelep.gamevault.presentation.vault
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +29,9 @@ import androidx.navigation.compose.rememberNavController
 import me.fidelep.gamevault.R
 import me.fidelep.gamevault.domain.model.SearchFilter
 import me.fidelep.gamevault.domain.model.VideoGameModel
+import me.fidelep.gamevault.ui.navigation.ScreenDestinations
+import me.fidelep.gamevault.ui.views.SearchOptions
+import me.fidelep.gamevault.ui.views.VideoGameItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,6 +43,7 @@ fun VaultScreen(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedFilter by remember { mutableStateOf(SearchFilter.ALL) }
+    var expanded by remember { mutableStateOf(false) }
 
     SearchBar(
         modifier = modifier,
@@ -64,37 +60,15 @@ fun VaultScreen(
                 placeholder = { Text(stringResource(R.string.search)) },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 trailingIcon = {
-                    Box(
-                        modifier =
-                            Modifier
-                                .wrapContentSize(Alignment.TopStart)
-                                .padding(end = 8.dp),
-                    ) {
-                        var expanded by remember { mutableStateOf(false) }
-
-                        TextButton(onClick = { expanded = true }) {
-                            Text(selectedFilter.name)
-                            Icon(
-                                Icons.Default.ArrowDropDown,
-                                contentDescription = stringResource(R.string.filter_options),
-                            )
-                        }
-
-                        DropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false },
-                        ) {
-                            SearchFilter.entries.forEach { filter ->
-                                DropdownMenuItem(
-                                    text = { Text(filter.name) },
-                                    onClick = {
-                                        selectedFilter = filter
-                                        expanded = false
-                                    },
-                                )
-                            }
-                        }
-                    }
+                    SearchOptions(
+                        selectedFilter = selectedFilter,
+                        isExpanded = expanded,
+                        onExpand = { isExpanded -> expanded = isExpanded },
+                        onMenuItemSelect = { filter ->
+                            selectedFilter = filter
+                            expanded = false
+                        },
+                    )
                 },
             )
         },
@@ -114,7 +88,19 @@ fun VaultScreen(
             items(videoGames) {
                 VideoGameItem(
                     videoGame = it,
-                    onItemClick = {},
+                    onItemClick = {
+                        navController.navigate(
+                            route =
+                                ScreenDestinations.Details.route.replace(
+                                    "{video_game_id}",
+                                    it.id.toString(),
+                                ),
+                        ) {
+                            popUpTo(route = ScreenDestinations.Vault.route)
+                            launchSingleTop = true
+                            restoreState = false
+                        }
+                    },
                 )
             }
         }

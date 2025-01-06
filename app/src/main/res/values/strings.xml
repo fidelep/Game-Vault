@@ -7,4 +7,13 @@
     <string name="release_date_data">Fecha de estreno: %1$s</string>
     <string name="search">Buscar...</string>
     <string name="filter_options">Opciones de filtro</string>
+    <string name="delete_icon">Icono de borrar</string>
+    <string name="delete">Borrar</string>
+    <string name="save">Guardar</string>
+    <string name="edit">Editar</string>
+    <string name="accept">Aceptar</string>
+    <string name="error">Error</string>
+    <string name="alert_icon">Icono de la alerta</string>
+    <string name="loading">Cargando</string>
+    <string name="attention">Atención</string>
 </resources>

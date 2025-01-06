@@ -10,6 +10,7 @@ import me.fidelep.gamevault.domain.interfaces.IRemoteRepository
 import me.fidelep.gamevault.domain.usecase.DownloadVideoGamesUseCase
 import me.fidelep.gamevault.domain.usecase.GetVideoGamesUseCase
 import me.fidelep.gamevault.domain.usecase.RemoveVideoGameUseCase
+import me.fidelep.gamevault.domain.usecase.RetrieveVideoGameByIdUseCase
 import me.fidelep.gamevault.domain.usecase.SaveVideoGamesUseCase
 import me.fidelep.gamevault.domain.usecase.UpdateVideoGameUseCase
 
@@ -39,4 +40,9 @@ object ViewModelModule {
     @ViewModelScoped
     @Provides
     fun provideUpdateVideoGameUseCase(localRepository: ILocalRepository): UpdateVideoGameUseCase = UpdateVideoGameUseCase(localRepository)
+
+    @ViewModelScoped
+    @Provides
+    fun retrieveVideoGameByIdUseCase(localRepository: ILocalRepository): RetrieveVideoGameByIdUseCase =
+        RetrieveVideoGameByIdUseCase(localRepository)
 }

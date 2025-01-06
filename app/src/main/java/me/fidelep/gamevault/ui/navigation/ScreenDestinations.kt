@@ -7,5 +7,5 @@ sealed class ScreenDestinations(
 
     object Vault : ScreenDestinations("vault_route")
 
-    object Details : ScreenDestinations("details/{videoGame}")
+    object Details : ScreenDestinations("details_route/{video_game_id}")
 }

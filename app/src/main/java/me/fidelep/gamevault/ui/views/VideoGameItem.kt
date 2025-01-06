@@ -1,4 +1,4 @@
-package me.fidelep.gamevault.presentation.vault
+package me.fidelep.gamevault.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

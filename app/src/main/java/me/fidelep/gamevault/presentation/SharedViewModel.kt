@@ -1,4 +1,4 @@
-package me.fidelep.gamevault.presentation.vault
+package me.fidelep.gamevault.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,31 +12,40 @@ import me.fidelep.gamevault.domain.model.SearchModel
 import me.fidelep.gamevault.domain.model.VideoGameModel
 import me.fidelep.gamevault.domain.model.VideoGameResult
 import me.fidelep.gamevault.domain.usecase.GetVideoGamesUseCase
-import me.fidelep.gamevault.presentation.state.UiState
+import me.fidelep.gamevault.ui.state.UiEvent
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
 @HiltViewModel
-class VaultViewModel @Inject constructor(
+class SharedViewModel @Inject constructor(
     private val getVideoGamesUseCase: GetVideoGamesUseCase,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(UiState())
+    private val _uiState = MutableStateFlow<List<VideoGameModel>>(listOf())
     val uiState = _uiState.asStateFlow()
 
+    private val _uiEvent = MutableStateFlow<UiEvent>(UiEvent.Loading)
+    val uiEvent = _uiEvent.asStateFlow()
+
     init {
+        getVideoGames()
+    }
+
+    fun getVideoGames() {
         viewModelScope.launch {
+            _uiEvent.update { UiEvent.Loading }
+
             val result = getVideoGamesUseCase(SearchModel())
 
             when (result) {
                 is VideoGameResult.Error ->
-                    _uiState.update {
-                        UiState(isLoading = false, error = result.value)
+                    _uiEvent.update {
+                        UiEvent.Error(result.value.toString()) // TODO: Implement friendly user error mapper
                     }
 
-                is VideoGameResult.Success<*> ->
-                    _uiState.update {
-                        UiState(isLoading = false, videoGames = result.data as List<VideoGameModel>)
-                    }
+                is VideoGameResult.Success<*> -> {
+                    _uiState.emit(result.data as List<VideoGameModel>)
+                    _uiEvent.update { UiEvent.Idle }
+                }
             }
         }
     }
@@ -45,26 +54,23 @@ class VaultViewModel @Inject constructor(
         params: String,
         filter: SearchFilter,
     ) {
-        _uiState.update {
-            it.copy(
-                isLoading = true,
-            )
-        }
         viewModelScope.launch {
+            _uiEvent.update { UiEvent.Loading }
+
             val search = SearchModel(params, filter)
 
             val result = getVideoGamesUseCase(search)
 
             when (result) {
                 is VideoGameResult.Error ->
-                    _uiState.update {
-                        UiState(isLoading = false, error = result.value)
+                    _uiEvent.update {
+                        UiEvent.Error(result.value.toString()) // TODO: Implement friendly user error mapper
                     }
 
-                is VideoGameResult.Success<*> ->
-                    _uiState.update {
-                        UiState(isLoading = false, videoGames = result.data as List<VideoGameModel>)
-                    }
+                is VideoGameResult.Success<*> -> {
+                    _uiState.emit(result.data as List<VideoGameModel>)
+                    _uiEvent.update { UiEvent.Idle }
+                }
             }
         }
     }

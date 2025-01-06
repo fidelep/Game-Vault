@@ -35,4 +35,10 @@ interface VideoGameDao {
             "AND ${VideoGameEntity.COLUMN_IS_ACTIVE} = 1",
     )
     suspend fun getByGenre(genre: String): List<VideoGameEntity>
+
+    @Query(
+        "SELECT * FROM ${VideoGameEntity.TABLE_NAME} " +
+            "WHERE ${VideoGameEntity.COLUMN_ID} = :id LIMIT 1",
+    )
+    suspend fun getById(id: Int): VideoGameEntity?
 }

@@ -6,4 +6,5 @@ enum class ResponseError {
     WRITING_READING,
     CANT_MODIFY,
     NOT_SAVED,
+    NO_MATCHES,
 }
