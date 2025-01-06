@@ -34,6 +34,9 @@ android {
                 "proguard-rules.pro",
             )
         }
+        debug {
+            // isMinifyEnabled = true // Activate only to test otherwise debug build will be slow
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

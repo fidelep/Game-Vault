@@ -19,3 +19,21 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Keep Application class
+-keep public class me.fidelep.gamevault.GameVaultApp {
+    public *;
+}
+
+# Keep activities and fragments (if reflection is used to instantiate them)
+-keep public class * extends android.app.Activity
+-keep public class * extends androidx.fragment.app.Fragment
+
+# Keep models used for serialization/deserialization (e.g., Gson, Moshi)
+-keep class com.example.app.model.** { *; }
+
+# Keep custom views
+-keepclassmembers class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
